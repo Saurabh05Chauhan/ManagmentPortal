@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="newdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbstudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="StudentName" Type="varchar" MaxLength="45" />
+    <Property Name="Class" Type="int" />
+    <Property Name="Section" Type="char" MaxLength="2" />
+    <Property Name="Stream" Type="varchar" MaxLength="45" />
+    <Property Name="IsActive" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="tbstudentfee">
+    <Key>
+      <PropertyRef Name="StudentFeeID" />
+    </Key>
+    <Property Name="StudentFeeID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="Fees" Type="int" />
+    <Property Name="Fine" Type="int" />
+    <Property Name="FeeSubmissionDate" Type="datetime" Precision="0" />
+    <Property Name="ForMonth" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="tbstudentinfo">
+    <Key>
+      <PropertyRef Name="StudentInfoID" />
+    </Key>
+    <Property Name="StudentInfoID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="Fathers Name" Type="varchar" MaxLength="45" />
+    <Property Name="Mothers Name" Type="varchar" MaxLength="45" />
+    <Property Name="DateOfBirth" Type="datetime" Precision="0" />
+    <Property Name="Address" Type="varchar" MaxLength="45" />
+    <Property Name="AdmissionDate" Type="datetime" Precision="0" />
+    <Property Name="SchoolLeavingDate" Type="datetime" Precision="0" />
+  </EntityType>
+  <Association Name="fk_studentFeeID">
+    <End Role="tbstudent" Type="Self.tbstudent" Multiplicity="0..1" />
+    <End Role="tbstudentfee" Type="Self.tbstudentfee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbstudent">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="tbstudentfee">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StudentID">
+    <End Role="tbstudent" Type="Self.tbstudent" Multiplicity="0..1" />
+    <End Role="tbstudentinfo" Type="Self.tbstudentinfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbstudent">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="tbstudentinfo">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="newdbModelStoreContainer">
+    <EntitySet Name="tbstudent" EntityType="Self.tbstudent" Schema="newdb" store:Type="Tables" />
+    <EntitySet Name="tbstudentfee" EntityType="Self.tbstudentfee" Schema="newdb" store:Type="Tables" />
+    <EntitySet Name="tbstudentinfo" EntityType="Self.tbstudentinfo" Schema="newdb" store:Type="Tables" />
+    <AssociationSet Name="fk_studentFeeID" Association="Self.fk_studentFeeID">
+      <End Role="tbstudent" EntitySet="tbstudent" />
+      <End Role="tbstudentfee" EntitySet="tbstudentfee" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StudentID" Association="Self.fk_StudentID">
+      <End Role="tbstudent" EntitySet="tbstudent" />
+      <End Role="tbstudentinfo" EntitySet="tbstudentinfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="newdbEntities1">
+    <EntitySetMapping Name="tbstudents">
+      <EntityTypeMapping TypeName="Entities.tbstudent">
+        <MappingFragment StoreEntitySet="tbstudent">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Stream" ColumnName="Stream" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbstudentfees">
+      <EntityTypeMapping TypeName="Entities.tbstudentfee">
+        <MappingFragment StoreEntitySet="tbstudentfee">
+          <ScalarProperty Name="StudentFeeID" ColumnName="StudentFeeID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="Fees" ColumnName="Fees" />
+          <ScalarProperty Name="Fine" ColumnName="Fine" />
+          <ScalarProperty Name="FeeSubmissionDate" ColumnName="FeeSubmissionDate" />
+          <ScalarProperty Name="ForMonth" ColumnName="ForMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbstudentinfoes">
+      <EntityTypeMapping TypeName="Entities.tbstudentinfo">
+        <MappingFragment StoreEntitySet="tbstudentinfo">
+          <ScalarProperty Name="StudentInfoID" ColumnName="StudentInfoID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FathersName" ColumnName="FathersName" />
+          <ScalarProperty Name="MothersName" ColumnName="MothersName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AdmissionDate" ColumnName="AdmissionDate" />
+          <ScalarProperty Name="SchoolLeavingDate" ColumnName="SchoolLeavingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbstudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="StudentName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Class" Type="Int32" />
+    <Property Name="Section" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Stream" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="SByte" />
+    <NavigationProperty Name="tbstudentfees" Relationship="Self.fk_studentFeeID" FromRole="tbstudent" ToRole="tbstudentfee" />
+    <NavigationProperty Name="tbstudentinfoes" Relationship="Self.fk_StudentID" FromRole="tbstudent" ToRole="tbstudentinfo" />
+  </EntityType>
+  <EntityType Name="tbstudentfee">
+    <Key>
+      <PropertyRef Name="StudentFeeID" />
+    </Key>
+    <Property Name="StudentFeeID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="Fees" Type="Int32" />
+    <Property Name="Fine" Type="Int32" />
+    <Property Name="FeeSubmissionDate" Type="DateTime" />
+    <Property Name="ForMonth" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbstudent" Relationship="Self.fk_studentFeeID" FromRole="tbstudentfee" ToRole="tbstudent" />
+  </EntityType>
+  <EntityType Name="tbstudentinfo">
+    <Key>
+      <PropertyRef Name="StudentInfoID" />
+    </Key>
+    <Property Name="StudentInfoID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="FathersName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="MothersName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" />
+    <Property Name="Address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="AdmissionDate" Type="DateTime" />
+    <Property Name="SchoolLeavingDate" Type="DateTime" />
+    <NavigationProperty Name="tbstudent" Relationship="Self.fk_StudentID" FromRole="tbstudentinfo" ToRole="tbstudent" />
+  </EntityType>
+  <Association Name="fk_studentFeeID">
+    <End Role="tbstudent" Type="Self.tbstudent" Multiplicity="0..1" />
+    <End Role="tbstudentfee" Type="Self.tbstudentfee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbstudent">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="tbstudentfee">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StudentID">
+    <End Role="tbstudent" Type="Self.tbstudent" Multiplicity="0..1" />
+    <End Role="tbstudentinfo" Type="Self.tbstudentinfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbstudent">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="tbstudentinfo">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="newdbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbstudents" EntityType="Self.tbstudent" />
+    <EntitySet Name="tbstudentfees" EntityType="Self.tbstudentfee" />
+    <EntitySet Name="tbstudentinfoes" EntityType="Self.tbstudentinfo" />
+    <AssociationSet Name="fk_studentFeeID" Association="Self.fk_studentFeeID">
+      <End Role="tbstudent" EntitySet="tbstudents" />
+      <End Role="tbstudentfee" EntitySet="tbstudentfees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StudentID" Association="Self.fk_StudentID">
+      <End Role="tbstudent" EntitySet="tbstudents" />
+      <End Role="tbstudentinfo" EntitySet="tbstudentinfoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
